@@ -10,7 +10,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 
 # local imports
-from .serializers import RegisterSerializer, LoginSerializer
+from .serializers import RegisterSerializer, LoginSerializer, EditSerializer
 from .models import User
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -112,3 +112,27 @@ class ProfileView(RetrieveAPIView):
             }
 
         return Response(response, status=status_code)
+
+
+class EditView(APIView):
+    serializer_class = EditSerializer
+    permission_classes = (IsAuthenticated, )
+    authentication_classes = (JSONWebTokenAuthentication,)
+
+    def patch(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.update(User.objects.get(
+                username=request.user.username), request.data)
+            response = {
+                'success': 'True',
+                'status code': status.HTTP_200_OK,
+            }
+            status_code = status.HTTP_200_OK
+            return Response(response, status=status_code)
+        else:
+            response = {
+                'success': 'False',
+                'status code': status.HTTP_401_UNAUTHORIZED,
+            }
+            return Response(response, status=status.HTTP_401_UNAUTHORIZED)

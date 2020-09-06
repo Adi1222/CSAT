@@ -69,3 +69,25 @@ class LoginSerializer(serializers.Serializer):
             'email': user.email,
             'token': jwt_token
         }
+
+
+class EditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'first_name',
+                  'last_name', 'city', 'state', 'twitter']
+
+    def update(self, instance, validated_data):
+        user = instance
+        if user is None:
+            raise serializers.ValidationError(
+                'A user with this email and password is not found')
+
+        user.email = validated_data.get('email', user.email)
+        user.first_name = validated_data.get('first_name', user.first_name)
+        user.last_name = validated_data.get('last_name', user.last_name)
+        user.city = validated_data.get('city', user.city)
+        user.state = validated_data.get('state', user.state)
+        user.twitter = validated_data.get('twitter', user.twitter)
+        user.save()
+        return user
