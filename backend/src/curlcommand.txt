@@ -1,0 +1,5 @@
+ curl -X POST -H "Content-Type: application/json" -d '{"username":"alex@gmail.com","password":"xela@123"}' http://localhost:8000/api-token-auth/
+
+ ###
+
+ curl -H "Authorization: JWT <eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSIsImV4cCI6MTYwMTczODQxMSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20ifQ.Kj3AcYpBKf9OtLMKq-ZfMQxBvHh_4RjMmrL9YTGt-FU>" http://localhost:8000/api/login/
