@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: theme.palette.primary.main,
   },
+  grid: {
+    paddingTop: "10px",
+  },
 }));
 
 const Signup = () => {
@@ -311,6 +314,11 @@ const Signup = () => {
             >
               Sign Up
             </Button>
+            <Grid container className={classes.grid}>
+              <Grid item className={classes.grid}>
+                <Link to="/">Already have an account? Log in</Link>
+              </Grid>
+            </Grid>
           </form>
         </Paper>
       </div>
