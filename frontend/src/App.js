@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // Local imports
 import Signup from "./components/Signup";
-import Login from "./components/Signup";
+import Login from "./components/Login";
 
 const App = () => {
   return (

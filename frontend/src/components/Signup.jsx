@@ -18,6 +18,7 @@ import { Twitter } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   cont: {
     paddingTop: "15%",
+    paddingBottom: "10%",
   },
   twitter: {
     color: "#1dadf2",
