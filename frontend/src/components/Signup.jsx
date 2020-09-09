@@ -146,8 +146,10 @@ const Signup = () => {
         url: "/api/register/",
       })
         .then((response) => {
-          let date = new Date();
-          date.setTime(date.getTime() + 180 * 60 * 1000); // 180 minutes
+          let now = new Date();
+          now.setTime(now.getTime() + 180 * 60 * 1000); // 180 minutes
+          let expiration = `expires ${now.toUTCString()}`;
+          document.cookie = `usertoken=${response.data.token};expires=${expiration} ;path=/`;
           setSignupError(false);
           history.push("/dashboard");
         })
@@ -158,9 +160,11 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    //
-    console.log(values.twitter);
-  }, []);
+    let token = document.cookie.split("=")[1]; // we got the token value
+    if (token !== "" && token !== undefined) {
+      history.push("/dashboard");
+    }
+  }, [dummy, history]);
 
   return (
     <Container component="main" maxWidth="sm">
