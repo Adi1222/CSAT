@@ -11,7 +11,10 @@ import {
   Button,
   IconButton,
 } from "@material-ui/core";
-import {} from "@material-ui/icons";
+import { Twitter } from "@material-ui/icons";
+
+// local imports
+import { getCookie } from "./Cookie";
 
 const useStyles = makeStyles((theme) => ({
   cont: {
@@ -78,8 +81,10 @@ const Login = () => {
         url: "/api/login/",
       })
         .then((response) => {
-          let date = new Date();
-          date.setTime(date.getTime() + 180 * 60 * 1000); // 180 minutes
+          let now = new Date();
+          now.setTime(now.getTime() + 180 * 60 * 1000); // 180 minutes
+          let expiration = `expires ${now.toUTCString()}`;
+          document.cookie = `usertoken=${response.data.token}; expires=${expiration} ; path=/`;
           setLoginError(false);
           history.push("/dashboard");
         })
@@ -89,7 +94,12 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    let token = getCookie("usertoken");
+    if (token !== "" && token !== undefined) {
+      history.push("/dashboard");
+    }
+  }, [dummy, history]);
 
   return (
     <Container component="main" maxWidth="sm">
