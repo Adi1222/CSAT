@@ -1,6 +1,7 @@
 import jwt_decode from "jwt-decode";
 
 export const getCookie = (cname) => {
+  // getcookie returns the valu of the token
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(";");
