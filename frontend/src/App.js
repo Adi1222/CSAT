@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Navber from "./components/Navbar";
+
 const App = () => {
   return (
     <div className="main">
@@ -12,7 +14,10 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/dashboard" component={Dashboard} />
+          <>
+            <Navber />
+            <Route path="/dashboard" component={Dashboard} />
+          </>
         </Switch>
       </BrowserRouter>
     </div>
