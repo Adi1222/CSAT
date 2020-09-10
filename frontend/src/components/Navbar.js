@@ -20,6 +20,9 @@ import {
   Hidden,
   Divider,
   FormControlLabel,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {} from "@material-ui/icons";
@@ -27,6 +30,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { getCookie } from "./Cookie";
+import Dashboard from "./Dashboard";
+
+const drawerWidth = 340;
 
 const useStyles = makeStyles((theme) => ({
   textfield: {
@@ -197,110 +203,132 @@ const Navbar = () => {
               <ChevronRightIcon />
             )}
           </IconButton>
-          <Divider />
-
-          <div>
-            {data.first_name.charAt(0)}
-            {data.last_name.charAt(0)}
-          </div>
-
-          <Divider />
-
-          <p>
-            {data.first_name} {data.last_name}
-          </p>
-          <p>
-            {data.email} | {data.city}, {data.state}
-          </p>
-
-          <Button variant="contained" onClick={handleDialog}>
-            Edit Profile
-          </Button>
-
-          <Divider />
-
-          <Dialog open={dialog} onClose={handleDialog}>
-            <DialogTitle id="form-dialog-title">Edit Your Profile </DialogTitle>
-            <form onSubmit={handleSubmit}>
-              <DialogContent>
-                <TextField
-                  variant="outlined"
-                  className={classes.textfield}
-                  onChange={handleChange}
-                  margin="normal"
-                  id="first_name"
-                  label="First Name"
-                  type="text"
-                  autoComplete="First Name"
-                  value={data.first_name}
-                  autoFocus
-                  required
-                  fullWidth
-                />
-
-                <TextField
-                  variant="outlined"
-                  className={classes.textfield}
-                  onChange={handleChange}
-                  margin="normal"
-                  id="last_name"
-                  label="Last Name"
-                  type="text"
-                  autoComplete="First Name"
-                  value={data.last_name}
-                  autoFocus
-                  required
-                  fullWidth
-                />
-
-                <TextField
-                  variant="outlined"
-                  className={classes.textfield}
-                  onChange={handleChange}
-                  id="city"
-                  label="Enter city name"
-                  type="text"
-                  value={data.city}
-                  autoFocus
-                  required
-                  fullWidth
-                />
-
-                <TextField
-                  variant="outlined"
-                  className={classes.textfield}
-                  onChange={handleChange}
-                  id="state"
-                  label="Enter state name"
-                  type="text"
-                  value={data.state}
-                  autoFocus
-                  required
-                  fullWidth
-                />
-
-                <FormControlLabel
-                  className={classes.textfield}
-                  onChange={handleChange}
-                  control={<Checkbox name="twitter" color="primary" />}
-                  label="I have a Twitter account"
-                  id="twitter"
-                  checked={data.twitter}
-                />
-              </DialogContent>
-
-              <DialogActions>
-                <Button color="primary" onClick={handleDialog}>
-                  CANCEL
-                </Button>
-                <Button color="primary" type="submit">
-                  EDIT
-                </Button>
-              </DialogActions>
-            </form>
-          </Dialog>
         </div>
+        <Divider />
+
+        <div>
+          {data.first_name.charAt(0)}
+          {data.last_name.charAt(0)}
+        </div>
+
+        <Divider />
+
+        <p>
+          {data.first_name} {data.last_name}
+        </p>
+        <p>
+          {data.email} | {data.city}, {data.state}
+        </p>
+
+        <Button variant="contained" onClick={handleDialog}>
+          Edit Profile
+        </Button>
+
+        <Divider />
+
+        <Dialog open={dialog} onClose={handleDialog}>
+          <DialogTitle id="form-dialog-title">Edit Your Profile </DialogTitle>
+          <form onSubmit={handleSubmit}>
+            <DialogContent>
+              <TextField
+                variant="outlined"
+                className={classes.textfield}
+                onChange={handleChange}
+                margin="normal"
+                id="first_name"
+                label="First Name"
+                type="text"
+                autoComplete="First Name"
+                value={data.first_name}
+                autoFocus
+                required
+                fullWidth
+              />
+
+              <TextField
+                variant="outlined"
+                className={classes.textfield}
+                onChange={handleChange}
+                margin="normal"
+                id="last_name"
+                label="Last Name"
+                type="text"
+                autoComplete="First Name"
+                value={data.last_name}
+                autoFocus
+                required
+                fullWidth
+              />
+
+              <TextField
+                variant="outlined"
+                className={classes.textfield}
+                onChange={handleChange}
+                id="city"
+                label="Enter city name"
+                type="text"
+                value={data.city}
+                autoFocus
+                required
+                fullWidth
+              />
+
+              <TextField
+                variant="outlined"
+                className={classes.textfield}
+                onChange={handleChange}
+                id="state"
+                label="Enter state name"
+                type="text"
+                value={data.state}
+                autoFocus
+                required
+                fullWidth
+              />
+
+              <FormControlLabel
+                className={classes.textfield}
+                onChange={handleChange}
+                control={<Checkbox name="twitter" color="primary" />}
+                label="I have a Twitter account"
+                id="twitter"
+                checked={data.twitter}
+              />
+            </DialogContent>
+
+            <DialogActions>
+              <Button color="primary" onClick={handleDialog}>
+                CANCEL
+              </Button>
+              <Button color="primary" type="submit">
+                EDIT
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
+
+        <List>
+          <ListItem button onClick={() => history.push("/dashboard")}>
+            <ListItemIcon>
+              <Dashboard />
+            </ListItemIcon>
+            <ListItemText>Dashboard</ListItemText>
+          </ListItem>
+
+          <ListItem button onClick={() => history.push("/dashboard/charts")}>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Charts" />
+          </ListItem>
+
+          <ListItem button onClick={handleLogout}>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
+        </List>
+        <Divider />
       </Drawer>
+
+      <main></main>
     </div>
   );
 };
