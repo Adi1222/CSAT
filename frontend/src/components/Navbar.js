@@ -18,9 +18,13 @@ import {
   Checkbox,
   TextField,
   Hidden,
+  Divider,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {} from "@material-ui/icons";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { getCookie } from "./Cookie";
 
 const useStyles = makeStyles((theme) => ({}));
@@ -179,7 +183,56 @@ const Navbar = () => {
         anchor="left"
         open={open}
         classes={{ paper: classes.drawerPaper }}
-      ></Drawer>
+      >
+        <div>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+          <Divider />
+
+          <div>
+            {data.first_name.charAt(0)}
+            {data.last_name.charAt(0)}
+          </div>
+
+          <Divider />
+
+          <p>
+            {data.first_name} {data.last_name}
+          </p>
+          <p>
+            {data.email} | {data.city}, {data.state}
+          </p>
+
+          <Button variant="contained" onClick={handleDialog}>
+            Edit Profile
+          </Button>
+
+          <Divider />
+
+          <Dialog open={dialog} onClose={handleDialog}>
+            <DialogTitle id="form-dialog-title">Edit Your Profile </DialogTitle>
+            <form onSubmit={handleSubmit}>
+              <DialogContent>
+                <TextField
+                  variant="outlined"
+                  onChange={handleChange}
+                  id="first_name"
+                  label="First Name"
+                  type="text"
+                  value={data.first_name}
+                />
+              </DialogContent>
+            </form>
+          </Dialog>
+        </div>
+      </Drawer>
     </div>
   );
 };
+
+export default Navbar;
