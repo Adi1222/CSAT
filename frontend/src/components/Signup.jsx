@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import { Twitter } from "@material-ui/icons";
 
+
 const useStyles = makeStyles((theme) => ({
   cont: {
     paddingTop: "15%",
@@ -330,5 +331,7 @@ const Signup = () => {
     </Container>
   );
 };
+
+
 
 export default Signup;
