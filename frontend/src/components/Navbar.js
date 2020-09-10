@@ -19,6 +19,7 @@ import {
   TextField,
   Hidden,
   Divider,
+  FormControlLabel,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {} from "@material-ui/icons";
@@ -27,7 +28,11 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { getCookie } from "./Cookie";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  textfield: {
+    margin: "10px 0px",
+  },
+}));
 
 const Navbar = () => {
   const classes = useStyles();
@@ -220,13 +225,78 @@ const Navbar = () => {
               <DialogContent>
                 <TextField
                   variant="outlined"
+                  className={classes.textfield}
                   onChange={handleChange}
+                  margin="normal"
                   id="first_name"
                   label="First Name"
                   type="text"
+                  autoComplete="First Name"
                   value={data.first_name}
+                  autoFocus
+                  required
+                  fullWidth
+                />
+
+                <TextField
+                  variant="outlined"
+                  className={classes.textfield}
+                  onChange={handleChange}
+                  margin="normal"
+                  id="last_name"
+                  label="Last Name"
+                  type="text"
+                  autoComplete="First Name"
+                  value={data.last_name}
+                  autoFocus
+                  required
+                  fullWidth
+                />
+
+                <TextField
+                  variant="outlined"
+                  className={classes.textfield}
+                  onChange={handleChange}
+                  id="city"
+                  label="Enter city name"
+                  type="text"
+                  value={data.city}
+                  autoFocus
+                  required
+                  fullWidth
+                />
+
+                <TextField
+                  variant="outlined"
+                  className={classes.textfield}
+                  onChange={handleChange}
+                  id="state"
+                  label="Enter state name"
+                  type="text"
+                  value={data.state}
+                  autoFocus
+                  required
+                  fullWidth
+                />
+
+                <FormControlLabel
+                  className={classes.textfield}
+                  onChange={handleChange}
+                  control={<Checkbox name="twitter" color="primary" />}
+                  label="I have a Twitter account"
+                  id="twitter"
+                  checked={data.twitter}
                 />
               </DialogContent>
+
+              <DialogActions>
+                <Button color="primary" onClick={handleDialog}>
+                  CANCEL
+                </Button>
+                <Button color="primary" type="submit">
+                  EDIT
+                </Button>
+              </DialogActions>
             </form>
           </Dialog>
         </div>
