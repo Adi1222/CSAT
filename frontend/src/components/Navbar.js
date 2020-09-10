@@ -10,6 +10,14 @@ import {
   DialogActions,
   DialogTitle,
   DialogContent,
+  CssBaseline,
+  IconButton,
+  Button,
+  Typography,
+  List,
+  Checkbox,
+  TextField,
+  Hidden,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {} from "@material-ui/icons";
@@ -134,10 +142,44 @@ const Navbar = () => {
     fetchProfile();
   }, [dummy]);
 
-
   return (
-      
-  )
+    <div>
+      <CssBaseline />
+      <AppBar position="fixed">
+        <Toolbar>
+          <IconButton>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6">Welcome to your Dashboard!</Typography>
+          <Hidden mdDown>
+            <Button style={{ color: "#fff" }} onClick={handleDialog}>
+              Edit Profile
+            </Button>
+            <Button
+              style={{ color: "#fff" }}
+              onClick={() => history.push("/dashboard")}
+            >
+              Dashboard
+            </Button>
+            <Button
+              style={{ color: "#fff" }}
+              onClick={() => history.push("/dashboard/charts")}
+            >
+              Charts
+            </Button>
+            <Button style={{ color: "#fff" }} onClick={handleLogout}>
+              Logout
+            </Button>
+          </Hidden>
+        </Toolbar>
+      </AppBar>
 
-
+      <Drawer
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{ paper: classes.drawerPaper }}
+      ></Drawer>
+    </div>
+  );
 };
