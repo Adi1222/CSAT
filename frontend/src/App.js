@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Navber from "./components/Navbar";
+import Charts from "./components/Charts";
 
 const App = () => {
   return (
@@ -14,9 +15,10 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/dashboard/charts" component={Charts} />
           <>
             <Navber />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route exact path="/dashboard" component={Dashboard} />
           </>
         </Switch>
       </BrowserRouter>
